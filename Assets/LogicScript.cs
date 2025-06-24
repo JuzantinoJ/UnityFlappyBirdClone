@@ -8,6 +8,21 @@ public class LogicScript : MonoBehaviour
     public Text scoreText;
 
     public GameObject gameOverScreen;
+    public GameObject startScreen;
+    public GameObject bird;
+
+    public static bool gameIsActive = false;
+
+
+
+    void Start()
+    {
+        // When the game starts, show the start screen and hide bird & score
+        startScreen.SetActive(true);
+        bird.SetActive(false);
+        scoreText.gameObject.SetActive(false);
+        
+    }
 
     [ContextMenu("Increase Score")]
     public void addScore(int scoreToAdd)
@@ -24,5 +39,14 @@ public class LogicScript : MonoBehaviour
     public void gameOver()
     {
         gameOverScreen.SetActive(true);
+    }
+
+    public void StartGame()
+    {
+        // Hide start screen, show bird and score
+        startScreen.SetActive(false);
+        bird.SetActive(true);
+        scoreText.gameObject.SetActive(true);
+        gameIsActive = true; // Game officially starts here
     }
 }

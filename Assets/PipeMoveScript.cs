@@ -26,6 +26,9 @@ public class PipeMoveScript : MonoBehaviour
     /// </summary>
     void Update()
     {
+        // Only move pipes if game has started
+        if (!LogicScript.gameIsActive) return;
+        
         // Move the pipe leftward continuously at a fixed speed
         transform.position = transform.position + (Vector3.left * moveSpeed) * Time.deltaTime;
 

@@ -35,6 +35,9 @@ public class PipeSpawnScript : MonoBehaviour
     /// </summary>
     void Update()
     {
+        // Only spawn pipes if game has started
+        if (!LogicScript.gameIsActive) return;
+        
         // Increment timer by the time passed since last frame
         if (timer < spawnRate)
         {

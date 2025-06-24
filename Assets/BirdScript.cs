@@ -55,5 +55,6 @@ public class BirdScript : MonoBehaviour
     {
         logic.gameOver();
         birdIsAlive = false;
+        LogicScript.gameIsActive = false;
     }
 }
