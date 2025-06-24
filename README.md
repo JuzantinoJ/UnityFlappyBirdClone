@@ -39,8 +39,21 @@ This project supports Docker for consistent Unity builds without installing Unit
 
 - [Docker](https://www.docker.com/get-started) installed
 
-### 📦 Build the Docker Image
+### 📦 Step 1: Build the Docker Image
 
 ```bash
 docker build -t unity-flappy .
+```
+
+### 🚀 Step 2: Build the Unity Project to WebGL
+
+```bash
+docker run -it --rm \
+  -v $(pwd)/Build:/app/Build \
+  unity-flappy \
+  /opt/unity/Editor/Unity \
+  -quit -batchmode -nographics \
+  -projectPath /app \
+  -buildTarget WebGL \
+  -executeMethod BuildScript.BuildWebGL
 ```
