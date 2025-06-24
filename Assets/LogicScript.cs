@@ -13,6 +13,9 @@ public class LogicScript : MonoBehaviour
 
     public static bool gameIsActive = false;
 
+    public AudioSource audioSource;
+    public AudioClip startSound;
+
 
 
     void Start()
@@ -43,10 +46,15 @@ public class LogicScript : MonoBehaviour
 
     public void StartGame()
     {
+        Debug.Log("Start Game button pressed");
+            // Play start sound
+        if (audioSource != null && startSound != null)
+            audioSource.PlayOneShot(startSound);
+
         // Hide start screen, show bird and score
         startScreen.SetActive(false);
         bird.SetActive(true);
         scoreText.gameObject.SetActive(true);
-        gameIsActive = true; // Game officially starts here
+        gameIsActive = true;
     }
 }

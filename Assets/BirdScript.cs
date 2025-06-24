@@ -17,6 +17,10 @@ public class BirdScript : MonoBehaviour
 
     public bool birdIsAlive = true;
 
+    public AudioSource audioSource;
+    public AudioClip flapSound;
+    public AudioClip deathSound;
+
     /// <summary>
     /// Called once when the game starts.
     /// Use this for any initialization (not needed here yet).
@@ -39,6 +43,8 @@ public class BirdScript : MonoBehaviour
             // Apply an upward velocity to the Rigidbody2D to simulate a flap
             myRigidbody.linearVelocity = Vector2.up * flapstrength;
 
+            if (flapSound != null && audioSource != null)
+                audioSource.PlayOneShot(flapSound);
             // Log to console for debugging (confirms spacebar input is detected)
             Debug.Log("Spacebar Pressed");
 
@@ -51,10 +57,30 @@ public class BirdScript : MonoBehaviour
 
     }
 
+    void Die()
+    {
+        if (birdIsAlive)
+        {
+            birdIsAlive = false;
+            LogicScript.gameIsActive = false;
+            logic.gameOver();
+        }
+        // play death sound
+        if (audioSource != null && deathSound != null)
+            audioSource.PlayOneShot(deathSound);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        logic.gameOver();
-        birdIsAlive = false;
-        LogicScript.gameIsActive = false;
+        Die();
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("DeathZone"))
+        {
+            Die();
+        }
+    }
+
 }
