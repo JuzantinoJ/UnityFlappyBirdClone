@@ -30,3 +30,17 @@ Assets/
 ├── Scenes/
 │   └── MainScene.unity
 ```
+
+## 🐳 Docker Build Support
+
+This project supports Docker for consistent Unity builds without installing Unity locally.
+
+### 🛠 Requirements
+
+- [Docker](https://www.docker.com/get-started) installed
+
+### 📦 Build the Docker Image
+
+```bash
+docker build -t unity-flappy .
+```
