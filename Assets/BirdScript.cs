@@ -13,6 +13,9 @@ public class BirdScript : MonoBehaviour
 
     // The upward force applied when the bird flaps
     public float flapstrength;
+    public LogicScript logic;
+
+    public bool birdIsAlive = true;
 
     /// <summary>
     /// Called once when the game starts.
@@ -20,7 +23,8 @@ public class BirdScript : MonoBehaviour
     /// </summary>
     void Start()
     {
-        // No initialization required at the moment
+
+        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
     }
 
     /// <summary>
@@ -30,7 +34,7 @@ public class BirdScript : MonoBehaviour
     void Update()
     {
         // Check if spacebar is pressed
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && birdIsAlive)
         {
             // Apply an upward velocity to the Rigidbody2D to simulate a flap
             myRigidbody.linearVelocity = Vector2.up * flapstrength;
@@ -44,5 +48,12 @@ public class BirdScript : MonoBehaviour
             // Under "Other Settings", change "Active Input Handling" to "Both"
             // This allows Unity to use both the old and new input systems
         }
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        logic.gameOver();
+        birdIsAlive = false;
     }
 }
