@@ -9,6 +9,7 @@ public class PipeMoveScript : MonoBehaviour
 {
     // Speed at which the pipe moves to the left (units per second)
     public float moveSpeed = 5;
+    public float deadZone = -22;
 
     /// <summary>
     /// Called once when the object is initialized.
@@ -27,5 +28,11 @@ public class PipeMoveScript : MonoBehaviour
     {
         // Move the pipe leftward continuously at a fixed speed
         transform.position = transform.position + (Vector3.left * moveSpeed) * Time.deltaTime;
+
+        if (transform.position.x < deadZone)
+        {
+            Debug.Log("Pipe Deleted!");
+            Destroy(gameObject);
+        }
     }
 }

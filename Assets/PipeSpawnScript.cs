@@ -17,6 +17,8 @@ public class PipeSpawnScript : MonoBehaviour
     // Timer to keep track of time between spawns
     private float timer = 0;
 
+    public float heightOffset = 10;
+
     /// <summary>
     /// Called once when the game starts.
     /// You can use this for initialization if needed.
@@ -50,6 +52,9 @@ public class PipeSpawnScript : MonoBehaviour
 
     void spawnPipe()
     {
-        Instantiate(pipe, transform.position, transform.rotation);
+        float lowestPoint = transform.position.y - heightOffset;
+        float highestPoint = transform.position.y + heightOffset;
+
+        Instantiate(pipe, new Vector3(transform.position.x, Random.Range(lowestPoint, highestPoint), 0 ), transform.rotation);
     }
 }
