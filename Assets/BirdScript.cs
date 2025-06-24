@@ -1,0 +1,48 @@
+using System.Security.Cryptography.X509Certificates; // ⚠️ This namespace is not needed for this script — can be removed.
+using UnityEngine;
+
+/// <summary>
+/// This script controls the bird's movement (flapping) in a Flappy Bird-style game.
+/// It listens for spacebar input and applies an upward velocity to simulate flapping.
+/// Attach this script to the Bird GameObject with a Rigidbody2D component.
+/// </summary>
+public class BirdScript : MonoBehaviour
+{
+    // Reference to the Rigidbody2D component for physics manipulation
+    public Rigidbody2D myRigidbody;
+
+    // The upward force applied when the bird flaps
+    public float flapstrength;
+
+    /// <summary>
+    /// Called once when the game starts.
+    /// Use this for any initialization (not needed here yet).
+    /// </summary>
+    void Start()
+    {
+        // No initialization required at the moment
+    }
+
+    /// <summary>
+    /// Called once per frame.
+    /// Checks for spacebar input and makes the bird "flap" upward by changing its velocity.
+    /// </summary>
+    void Update()
+    {
+        // Check if spacebar is pressed
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // Apply an upward velocity to the Rigidbody2D to simulate a flap
+            myRigidbody.linearVelocity = Vector2.up * flapstrength;
+
+            // Log to console for debugging (confirms spacebar input is detected)
+            Debug.Log("Spacebar Pressed");
+
+            // NOTE:
+            // If this input doesn't work:
+            // Go to Edit > Project Settings > Player
+            // Under "Other Settings", change "Active Input Handling" to "Both"
+            // This allows Unity to use both the old and new input systems
+        }
+    }
+}
